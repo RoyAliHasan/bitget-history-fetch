@@ -1,15 +1,18 @@
 const dotenv = require("dotenv");
 dotenv.config();
 const { SpotClient, FuturesClient, BrokerClient } = require("bitget-api");
-const { param } = require("../routes/history.routes");
-const API_KEY = process.env.API_KEY;
-const API_SECRETE = process.env.SECRETE_KEY;
-const API_PASS = process.env.PASS_PHRASE;
+// let API_KEY = null;
+// let API_SECRETE = null;
+// let API_PASS = null;
+// const getCredentials = (API_KEY_P, API_SECRETE_P, API_PASS_P) => {
+//   API_KEY = API_KEY_P;
+//   API_SECRETE = API_SECRETE_P;
+//   API_PASS = API_PASS_P;
+// };
+
 const client = new SpotClient({
-  apiKey: API_KEY,
-  apiSecret: API_SECRETE,
-  apiPass: API_PASS,
+  apiKey: process.env.API_KEY,
+  apiSecret: process.env.SECRETE_KEY,
+  apiPass: process.env.PASS_PHRASE,
 });
-
-
 module.exports = { client };

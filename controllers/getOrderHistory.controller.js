@@ -1,7 +1,15 @@
 // get History
-const api = require("../config/connectAPI");
-client = api.client;
+// const api = require("../config/connectAPI");
+const { SpotClient } = require("bitget-api");
+
+// client = api.client;
 const getOrderHistoryController = async (req, res) => {
+  const client = new SpotClient({
+    apiKey: req.params.apiKey,
+    apiSecret: req.params.secKey,
+    apiPass: req.params.paraPhrase,
+  });
+
   try {
     client
       .getOrderHistory("IXTUSDT_SPBL", {

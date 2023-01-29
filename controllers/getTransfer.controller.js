@@ -1,8 +1,16 @@
 // get History
-const api = require("../config/connectAPI");
-client = api.client;
+// const api = require("../config/connectAPI");
+// client = api.client;
+const { SpotClient } = require("bitget-api");
+
 const getTransferHistoryController = async (req, res) => {
   try {
+    const client = new SpotClient({
+      apiKey: req.params.apiKey,
+      apiSecret: req.params.secKey,
+      apiPass: req.params.paraPhrase,
+    });
+
     client
       .getTransferHistory({
         coinId: req.query.coinId,
