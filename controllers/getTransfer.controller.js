@@ -1,27 +1,26 @@
 // get History
 const api = require("../config/connectAPI");
 client = api.client;
-const getTransactionHistoryController = async (req, res) => {
+const getTransferHistoryController = async (req, res) => {
   try {
     client
-      .getTransactionHistory({
+      .getTransferHistory({
         coinId: req.query.coinId,
-        groupType: req.query.groupType,
-        bizType: req.query.bizType,
+        fromType: req.query.groupType,
         before: req.query.before,
         after: req.query.after,
         limit: req.query.limit,
       })
       .then((result) => {
-        console.log("GET: TransactionHistory", result);
+        console.log("GET: TransferHistory", result);
         res.send(result);
       })
       .catch((err) => {
-        console.error("ERROR: TransactionHistory", err);
+        console.error("ERROR: TransactionHistory: ", err);
         res.send(err);
       });
   } catch (error) {
     return res.status(400).json({ error: "Something went wrong" });
   }
 };
-module.exports = { getTransactionHistoryController };
+module.exports = { getTransferHistoryController };

@@ -1,7 +1,7 @@
 // get History
 const api = require("../config/connectAPI");
 client = api.client;
-const getOrderHistory = async (req, res) => {
+const getOrderHistoryController = async (req, res) => {
   try {
     client
       .getOrderHistory("IXTUSDT_SPBL", {
@@ -11,14 +11,14 @@ const getOrderHistory = async (req, res) => {
       })
       .then((result) => {
         res.send(result);
-        console.log("getOrderHistory result: ", result);
+        console.log("GET: OrderHistory", result);
       })
       .catch((err) => {
-        console.error("getOrderHistory error: ", err);
+        console.error("ERROR: OrderHistory", err);
         res.send(err);
       });
   } catch (error) {
     return res.status(400).json({ error: "Something went wrong" });
   }
 };
-module.exports = { getOrderHistory };
+module.exports = { getOrderHistoryController };
