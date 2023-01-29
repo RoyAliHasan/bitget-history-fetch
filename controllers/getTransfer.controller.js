@@ -6,9 +6,9 @@ const { SpotClient } = require("bitget-api");
 const getTransferHistoryController = async (req, res) => {
   try {
     const client = new SpotClient({
-      apiKey: req.params.apiKey,
-      apiSecret: req.params.secKey,
-      apiPass: req.params.paraPhrase,
+      apiKey: req.query.apiKey,
+      apiSecret: req.query.secretKey,
+      apiPass: req.query.paraPhrase,
     });
 
     client

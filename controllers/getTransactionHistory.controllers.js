@@ -5,9 +5,9 @@ const api = require("../config/connectAPI");
 const getTransactionHistoryController = async (req, res) => {
   try {
     const client = new SpotClient({
-      apiKey: req.params.apiKey,
-      apiSecret: req.params.secKey,
-      apiPass: req.params.paraPhrase,
+      apiKey: req.query.apiKey,
+      apiSecret: req.query.secretKey,
+      apiPass: req.query.paraPhrase,
     });
     client
       .getTransactionHistory({
