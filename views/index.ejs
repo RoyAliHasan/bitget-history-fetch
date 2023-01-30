@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<htm>
+  <head>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #333;
+        color: #fff;
+      }
+
+      .navbar a {
+        color: #fff;
+        text-decoration: none;
+        margin-right: 20px;
+        font-size: 16px;
+        margin-left: 34px;
+      }
+
+      .logo {
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .navbar {
+          flex-direction: column;
+          align-items: center;
+        }
+    }
+
+      .navbar a {
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+      h1 {
+        text-align: left;
+        font-size: 36px;
+        font-family: sans-serif;
+        color: #333;
+      }
+
+      .input-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        
+      }
+
+      .input-field {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      .submit-button {
+        padding: 10px 20px;
+        background-color: red;
+        color: #fff;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+<body>
+    <body>
+
+        <nav class="navbar">
+            <div class="logo">GETBIT FETCH HISTORY</div>
+            <div>
+              <a href="#">Order History</a>
+              <a href="#">Transaction History</a>
+              <a href="#">Transfer History</a>
+            </div>
+          </nav>
+        <div class="input-container">
+          <input type="text" class="input-field" placeholder="Enter ApiKey" />
+          <input type="text" class="input-field" placeholder="Enter SecretKey" />
+          <input type="text" class="input-field" placeholder="Enter ParaPhrase" />
+          <button class="submit-button">Submit</button>
+        </div>
+      </body>
+</body>
+</html>

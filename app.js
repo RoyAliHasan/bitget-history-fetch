@@ -1,10 +1,12 @@
 const express = require("express");
 const app = express();
+
+// Set Template Engine
+app.set("view engine", "ejs");
+
 app.use("/v1/api", require("./routes/history.routes"));
 
-app.get("/", (req, res) => {
-  res.send({ message: "Hello I'm Your Friend BitGet History Fetcher" });
-});
+app.use("/", require("./routes/home.routes"));
 
 const server = () => {
   try {
