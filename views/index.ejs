@@ -185,11 +185,12 @@ submitButton.addEventListener("click", function() {
   const apiKey = document.getElementById("apiKey").value;
   const secretKey = document.getElementById("secretKey").value;
   const paraPhrase = document.getElementById("paraPhrase").value;
+// console.log(apiKey.length)
+  if (apiKey.length<5 || secretKey<5 || paraPhrase.length<5 ) {
+    window.alert("Please Enter the Data into input Fields")
+    return -1;
+  }
   
-  // Perform any action you want with the input values
-  console.log(`Api Key: ${apiKey}`);
-  console.log(`Secret Key: ${secretKey}`);
-  console.log(`Para Phrase: ${paraPhrase}`);
 
 
   axios({
@@ -229,7 +230,7 @@ limit:100,
           cell3.innerHTML = data.requestTime;
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
         });
 
 
@@ -270,7 +271,6 @@ limit:100,
           cell3.innerHTML = data.requestTime;
         })
         .catch(function (error) {
-          console.log(error);
         });
 // Transfer
 axios({
