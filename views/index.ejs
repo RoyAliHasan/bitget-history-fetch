@@ -199,6 +199,8 @@ submitButton.addEventListener("click", function() {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
     },
+    withCredentials: true,
+      credentials: 'same-origin',
 
   params:{
     apiKey:apiKey,
@@ -236,6 +238,8 @@ limit:100,
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
     },
+    withCredentials: true,
+      credentials: 'same-origin',
 
   params:{
     apiKey:apiKey,
@@ -272,6 +276,8 @@ axios({
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
     },
+    withCredentials: true,
+      credentials: 'same-origin',
 
   params:{
     apiKey:apiKey,
