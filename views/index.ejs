@@ -1,84 +1,122 @@
 <!DOCTYPE html>
-<htm>
+<html>
   <head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <style>
-        body{
-            margin: 0;
-            padding: 0;
-        }
-      .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-        background-color: #333;
-        color: #fff;
-      }
+      .form-keytable {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  margin-bottom: 700px;
+}
 
-      .navbar a {
-        color: #fff;
-        text-decoration: none;
-        margin-right: 20px;
-        font-size: 16px;
-        margin-left: 34px;
-      }
+table {
+  width: 50%;
+  border-collapse: collapse;
+  height: 20%;
+  margin-left: 100px;
+  margin-bottom: 40px;
+}
 
-      .logo {
-        font-size: 20px;
-        font-weight: bold;
-      }
+thead {
+  background-color: #333;
+  color: #fff;
+}
 
-      @media only screen and (max-width: 600px) {
-        .navbar {
-          flex-direction: column;
-          align-items: center;
-        }
-    }
+th,
+td {
+  padding: 3px;
+  border: 1px solid #333;
+  text-align: left;
+  width: 10%;
+}
 
-      .navbar a {
-        margin-right: 0;
-        margin-bottom: 20px;
-      }
-      h1 {
-        text-align: left;
-        font-size: 36px;
-        font-family: sans-serif;
-        color: #333;
-      }
+th {
+  background-color: #333;
+  color: #fff;
+}
 
-      .input-container {
-        display: flex;
+tr:nth-child(even) {
+  background-color: #ddd;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+}
 
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        height: 100vh;
-        margin-bottom: 100px;
-        
-        
-      }
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 16px;
+  margin-left: 34px;
+}
 
-      .input-field {
-        padding: 10px 20px;
-        font-size: 16px;
-        margin: 20px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-      }
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
 
-      .submit-button {
-        padding: 10px 20px;
-        background-color: red;
-        color: #fff;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        margin-bottom: 30px;
+@media only screen and (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+}
 
-        margin-top: 20px;
-      }
+.navbar a {
+  margin-right: 0;
+  margin-bottom: 20px;
+}
+h1 {
+  text-align: left;
+  font-size: 36px;
+  font-family: sans-serif;
+  color: #333;
+}
+
+.input-container {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  margin-bottom: 100px;
+}
+
+.input-field {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: red;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 30px;
+
+  margin-top: 20px;
+}
+
     </style>
-  </head>
+</head>
 <body>
     <body>
 
@@ -90,12 +128,78 @@
               <a href="#">Transfer History</a>
             </div>
           </nav>
-        <div class="input-container">
-          <input type="text" class="input-field" placeholder="Enter ApiKey" />
-          <input type="text" class="input-field" placeholder="Enter SecretKey" />
-          <input type="text" class="input-field" placeholder="Enter ParaPhrase" />
-          <button class="submit-button">Submit</button>
-        </div>
-      </body>
-</body>
+
+         <div class="form-keytable">
+          <div class="input-container ">
+            <input type="text" id="apiKey" class="input-field" placeholder="Enter ApiKey" />
+            <input type="text" id="secretKey" class="input-field" placeholder="Enter SecretKey" />
+            <input type="text" id="paraPhrase" class="input-field" placeholder="Enter ParaPhrase" />
+            <button id="submitButton" class="submit-button">Submit</button>
+            
+          </div>
+        </body>
+  </body>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% for (var key in result) { %>
+                <tr>
+                  <td><%= key %></td>
+                  <td><%= result[key] %></td>
+                </tr>
+              <% } %>
+              <% for (var key in result.data) { %>
+                <tr>
+                  <td><%= key %></td>
+                  <td><%= result.data[key] %></td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+         </div>
+ <script>
+  const submitButton = document.getElementById("submitButton");
+
+submitButton.addEventListener("click", function() {
+  const apiKey = document.getElementById("apiKey").value;
+  const secretKey = document.getElementById("secretKey").value;
+  const paraPhrase = document.getElementById("paraPhrase").value;
+  
+  // Perform any action you want with the input values
+  console.log(`Api Key: ${apiKey}`);
+  console.log(`Secret Key: ${secretKey}`);
+  console.log(`Para Phrase: ${paraPhrase}`);
+
+
+  axios({
+  method: 'get',
+  url: 'https://bitget-history-fetch.vercel.app/v1/api/history',
+
+  params:{
+    apiKey:apiKey,
+    secretKey:secretKey,
+    paraPhrase:paraPhrase,
+    coinId:2,
+    groupType:"deposit",
+fromType:"spot",
+before:1659076670000,
+after:987952085712531457,
+limit:100,
+  }
+
+})
+  .then(function (response) {
+console.log(response)
+  });
+
+});
+
+
+ </script>
 </html>
