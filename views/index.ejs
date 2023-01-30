@@ -4,16 +4,14 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
-      .form-keytable {
+.main-con{
   display: flex;
-  flex-direction: row;
   align-items: center;
-  align-content: center;
-  margin-bottom: 700px;
+  /* justify-content: center; */
+  flex-direction: row;
 }
-
 table {
-  width: 50%;
+  width: 100%;
   border-collapse: collapse;
   height: 20%;
   margin-left: 100px;
@@ -87,11 +85,10 @@ h1 {
 
 .input-container {
   display: flex;
-
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  /* height: 100vh; */
   margin-bottom: 100px;
 }
 
@@ -118,7 +115,7 @@ h1 {
     </style>
 </head>
 <body>
-    <body>
+   
 
         <nav class="navbar">
             <div class="logo">GETBIT FETCH HISTORY</div>
@@ -129,40 +126,58 @@ h1 {
             </div>
           </nav>
 
-         <div class="form-keytable">
-          <div class="input-container ">
-            <input type="text" id="apiKey" class="input-field" placeholder="Enter ApiKey" />
-            <input type="text" id="secretKey" class="input-field" placeholder="Enter SecretKey" />
-            <input type="text" id="paraPhrase" class="input-field" placeholder="Enter ParaPhrase" />
-            <button id="submitButton" class="submit-button">Submit</button>
-            
-          </div>
-        </body>
-  </body>
+ <div class="main-con">
 
-          <table>
-            <thead>
-              <tr>
-                <th>Key</th>
-                <th>Value</th>
-              </tr>
-            </thead>
-            <tbody>
-            <% for (var key in result) { %>
-                <tr>
-                  <td><%= key %></td>
-                  <td><%= result[key] %></td>
-                </tr>
-              <% } %>
-              <% for (var key in result.data) { %>
-                <tr>
-                  <td><%= key %></td>
-                  <td><%= result.data[key] %></td>
-                </tr>
-              <% } %>
-            </tbody>
-          </table>
-         </div>
+  <div class="input-container">
+    <input
+      type="text"
+      id="apiKey"
+      class="input-field"
+      placeholder="Enter ApiKey"
+    />
+    <input
+      type="text"
+      id="secretKey"
+      class="input-field"
+      placeholder="Enter SecretKey"
+    />
+    <input
+      type="text"
+      id="paraPhrase"
+      class="input-field"
+      placeholder="Enter ParaPhrase"
+    />
+    <button id="submitButton" class="submit-button">Submit</button>
+  </div>
+         <table id="data-history">
+        <h2><caption>Get Order History</caption></h2>
+        <tr>
+          <th>Code</th>
+          <th>Message</th>
+          <th>Request Time</th>
+        </tr>
+      </table>
+      <table id="data-transactionHistory">
+        <h2><caption>Get Transaction History</caption></h2>
+        <tr>
+          <th>Code</th>
+          <th>Message</th>
+          <th>Request Time</th>
+        </tr>
+      </table>
+      <table id="data-transferHistory">
+        <h2><caption>Get Transfer History</caption></h2>
+        <tr>
+          <th>Code</th>
+          <th>Message</th>
+          <th>Request Time</th>
+        </tr>
+      </table>
+</div>
+
+     
+
+
  <script>
   const submitButton = document.getElementById("submitButton");
 
@@ -180,7 +195,6 @@ submitButton.addEventListener("click", function() {
   axios({
   method: 'get',
   url: 'https://bitget-history-fetch.vercel.app/v1/api/history',
-
   params:{
     apiKey:apiKey,
     secretKey:secretKey,
@@ -194,12 +208,89 @@ limit:100,
   }
 
 })
-  .then(function (response) {
-console.log(response)
-  });
+.then(function (response) {
+          let data = response.data;
+          let table = document.getElementById("data-history");
+          let row = table.insertRow();
+          let cell1 = row.insertCell(0);
+          let cell2 = row.insertCell(1);
+          let cell3 = row.insertCell(2);
+          cell1.innerHTML = data.code;
+          cell2.innerHTML = data.msg;
+          cell3.innerHTML = data.requestTime;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
 
-});
 
+        axios({
+  method: 'get',
+  url: 'https://bitget-history-fetch.vercel.app/v1/api/transaction',
+  params:{
+    apiKey:apiKey,
+    secretKey:secretKey,
+    paraPhrase:paraPhrase,
+    coinId:2,
+    groupType:"deposit",
+fromType:"spot",
+before:1659076670000,
+after:987952085712531457,
+limit:100,
+  }
+
+})
+.then(function (response) {
+          let data = response.data;
+          let table = document.getElementById("data-transactionHistory");
+          let row = table.insertRow();
+          let cell1 = row.insertCell(0);
+          let cell2 = row.insertCell(1);
+          let cell3 = row.insertCell(2);
+          cell1.innerHTML = data.code;
+          cell2.innerHTML = data.msg;
+          cell3.innerHTML = data.requestTime;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+// Transfer
+axios({
+  method: 'get',
+  url: 'https://bitget-history-fetch.vercel.app/v1/api/transfer',
+  params:{
+    apiKey:apiKey,
+    secretKey:secretKey,
+    paraPhrase:paraPhrase,
+    coinId:2,
+    groupType:"deposit",
+fromType:"spot",
+before:1659076670000,
+after:987952085712531457,
+limit:100,
+  }
+
+})
+.then(function (response) {
+          let data = response.data;
+          let table = document.getElementById("data-transferHistory");
+          let row = table.insertRow();
+          let cell1 = row.insertCell(0);
+          let cell2 = row.insertCell(1);
+          let cell3 = row.insertCell(2);
+          cell1.innerHTML = data.code;
+          cell2.innerHTML = data.msg;
+          cell3.innerHTML = data.requestTime;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      })
+
+      // Trans
+   
+      
 
  </script>
 </html>

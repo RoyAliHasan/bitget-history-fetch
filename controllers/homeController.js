@@ -6,7 +6,11 @@ const homeController = (req, res) => {
     apiPass: process.env.PASS_PHRASE,
   });
   client
-    .getApiKeyInfo()
+    .getOrderHistory("IXTUSDT_SPBL", {
+      before: 122222,
+      after: 222222,
+      limit: 10,
+    })
     .then((result) => {
       console.log("GET: ApiKEY INFO:", result);
       res.render("index", { result: result });
