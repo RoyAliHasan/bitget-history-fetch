@@ -195,13 +195,7 @@ submitButton.addEventListener("click", function() {
   axios({
   method: 'get',
   url: 'https://bitget-history-fetch.vercel.app/v1/api/history',
-  headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-       'Access-Control-Allow-Origin': '*',
-                  'Access-Control-Allow-Headers': '*',
-               
-    },
+  
   
   
 
@@ -237,12 +231,7 @@ limit:100,
         axios({
   method: 'get',
   url: 'https://bitget-history-fetch.vercel.app/v1/api/transaction',
-  headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-                  'Access-Control-Allow-Headers': '*',
-    },
+  
 
 
   params:{
@@ -276,12 +265,7 @@ limit:100,
 axios({
   method: 'get',
   url: 'https://bitget-history-fetch.vercel.app/v1/api/transfer',
-  headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-                  'Access-Control-Allow-Headers': '*',
-    },
+  
   
 
   params:{
