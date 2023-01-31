@@ -1,5 +1,7 @@
 const homeController = (req, res) => {
-  res.render("task2");
+  res.render("index");
 };
-
-module.exports = { homeController };
+const orderViewController = (req, res) => {
+  res.render("order");
+};
+module.exports = { homeController, orderViewController };

@@ -9,6 +9,8 @@ app.set("view engine", "ejs");
 app.use("/v1/api", require("./routes/history.routes"));
 
 app.use("/", require("./routes/home.routes"));
+app.use("/", require("./routes/home.routes"));
+
 app.use("/v1/api", require("./routes/orderDetails.routes"));
 
 const server = () => {

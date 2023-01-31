@@ -44,39 +44,7 @@ body {
   margin: 0;
   padding: 0;
 }
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background-color: #333;
-  color: #fff;
-}
 
-.navbar a {
-  color: #fff;
-  text-decoration: none;
-  margin-right: 20px;
-  font-size: 16px;
-  margin-left: 34px;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-@media only screen and (max-width: 600px) {
-  .navbar {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-.navbar a {
-  margin-right: 0;
-  margin-bottom: 20px;
-}
 h1 {
   text-align: left;
   font-size: 36px;
@@ -114,18 +82,11 @@ h1 {
 }
 
     </style>
+        <%- include('navBar'); %>
+
 </head>
 <body>
    
-
-        <nav class="navbar">
-            <div class="logo">GETBIT FETCH HISTORY</div>
-            <div>
-              <a href="#">Order History</a>
-              <a href="#">Transaction History</a>
-              <a href="#">Transfer History</a>
-            </div>
-          </nav>
 
  <div class="main-con">
 
