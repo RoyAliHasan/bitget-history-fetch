@@ -9,8 +9,6 @@ const getOrderHistoryController = async (req, res) => {
     apiSecret: req.query.secretKey,
     apiPass: req.query.paraPhrase,
   });
-  console.log(req.query.ApiKey)
-
   try {
     client
       .getOrderHistory("IXTUSDT_SPBL", {
@@ -20,11 +18,11 @@ const getOrderHistoryController = async (req, res) => {
       })
       .then((result) => {
         res.send(result);
-        console.log("GET: OrderHistory", result);
+        console.log("GET: OrderHistory");
       })
       .catch((err) => {
-        console.error("ERROR: OrderHistory", err);
-        res.send(err);
+        console.error("ERROR: Wrong Credentials OrderHistory");
+        res.status(400).json({ error: "Something went wrong" });
       });
   } catch (error) {
     return res.status(400).json({ error: "Something went wrong" });

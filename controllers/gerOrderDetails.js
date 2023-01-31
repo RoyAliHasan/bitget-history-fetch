@@ -11,7 +11,6 @@ const getOrdersU1Controller = async (req, res) => {
     client
       .getOrder(req.query.symbol, req.query.orderId, req.query.clientOrderId)
       .then((result) => {
-        res.send(result);
         console.log("GET: OrderHistory", result);
         if (result.data.length === 0) {
           const orderDetails = {
@@ -53,26 +52,25 @@ const getOrdersU2Controller = async (req, res) => {
     client
       .getOrder(req.query.symbol, req.query.orderId, req.query.clientOrderId)
       .then((result) => {
-        res.send(result);
-        console.log("GET: OrderHistory", result);
         if (result.data.length === 0) {
           const orderDetails = {
-            accountId: "1001",
+            accountId: "2000",
             symbol: "btcusdt_spbl",
             orderId: "100021",
-            fillId: "102211",
+            fillId: "11221122",
             orderType: "limit",
             side: "buy",
-            fillPrice: "38293.12",
-            fillQuantity: "1",
-            fillTotalAmount: "38293.12",
-            cTime: "1622697148",
+            fillPrice: "2872838293.12",
+            fillQuantity: "10",
+            fillTotalAmount: "3829311.12",
+            cTime: "162269714811",
             feeCcy: "btc",
-            fees: "0.0001",
+            fees: "1",
           };
           result.data.push(orderDetails);
         }
-        console.log(result);
+        console.log("GET: OrderHistory", result);
+
         console.log("Order Details U2: " + result);
         res.send(result);
       })
