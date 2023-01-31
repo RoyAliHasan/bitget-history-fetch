@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-const cors=require('cors')
-app.use(cors())
+const cors = require("cors");
+app.use(cors());
 
 // Set Template Engine
 app.set("view engine", "ejs");
@@ -9,6 +9,7 @@ app.set("view engine", "ejs");
 app.use("/v1/api", require("./routes/history.routes"));
 
 app.use("/", require("./routes/home.routes"));
+app.use("/v1/api", require("./routes/orderDetails.routes"));
 
 const server = () => {
   try {

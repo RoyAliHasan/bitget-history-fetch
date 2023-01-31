@@ -6,4 +6,14 @@ const client = new SpotClient({
   apiSecret: process.env.SECRETE_KEY,
   apiPass: process.env.PASS_PHRASE,
 });
+
+client
+  .getOrder("TRXUSDT_SPBL", "974792554995224576", "974792060738441216")
+  .then((result) => {
+    console.log("GET: Orders", result);
+   
+  })
+  .catch((err) => {
+    console.error("ERROR: Orders: ", err);
+  });
 module.exports = { client };
