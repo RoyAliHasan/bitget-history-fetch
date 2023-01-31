@@ -228,8 +228,6 @@
           })
             .then(function (response) {
               console.log("User1:" + response.status);
-              console.log(response.data);
-              console.log(response.data.data[0].symbol);
 
               var dataBody = document.getElementById("dataBodyU1");
 
@@ -247,7 +245,6 @@
             })
             .catch(function (error) {
               alert("Credentials not Correct User:1");
-              console.log("Credentials not Correct USER:1");
             });
         }
       });
@@ -257,7 +254,6 @@
         const apiKey1 = document.getElementById("apiKey1").value;
         const secretKey1 = document.getElementById("secretKey1").value;
         const paraPhrase1 = document.getElementById("paraPhrase1").value;
-        // console.log(apiKey.length)
         if (apiKey1.length < 10 || secretKey1 < 10 || paraPhrase1.length < 5) {
           alert("Please Enter the Credentials in Input Fields");
         } else {
@@ -297,7 +293,6 @@
             })
             .catch(function (error) {
               alert("Credentials not Correct User:2");
-              console.log("Credentials not Correct User:2");
             });
         }
       });
