@@ -4,183 +4,191 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
-      
-.main-con{
-  display: flex;
-  align-items: center;
-  /* justify-content: center; */
-  flex-direction: row;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  height: 20%;
-  margin-left: 100px;
-  margin-bottom: 40px;
-}
+        body {
+        margin: 0;
+        padding: 0;
+      }
+      .main-con {
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+        flex-direction: row;
+      }
+      table {
+        /* width: 50%; */
+        border-collapse: collapse;
+        margin-top: 20px;
+        
+      }
 
-thead {
-  background-color: #333;
-  color: #fff;
-}
+      thead {
+        background-color: #333;
+        color: #fff;
+      }
 
-th,
-td {
-  padding: 3px;
-  border: 1px solid #333;
-  text-align: left;
-  width: 10%;
-}
+      th,
+      td {
+        padding: 3px;
+        border: 1px solid #333;
+        text-align: left;
+      }
 
-th {
-  background-color: #333;
-  color: #fff;
-}
+      th {
+        background-color: #333;
+        color: #fff;
+      }
 
-tr:nth-child(even) {
-  background-color: #ddd;
-}
-body {
-  margin: 0;
-  padding: 0;
-}
+      tr:nth-child(even) {
+        background-color: #ddd;
+      }
+    
 
-h1 {
-  text-align: left;
-  font-size: 36px;
-  font-family: sans-serif;
-  color: #333;
-}
+      h1 {
+        text-align: left;
+        font-size: 36px;
+        font-family: sans-serif;
+        color: #333;
+      }
 
-.input-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  /* height: 100vh; */
-  margin-bottom: 100px;
-}
+      .input-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        /* height: 100vh; */
+        margin-bottom: 100px;
+      }
 
-.input-field {
-  padding: 10px 20px;
-  font-size: 16px;
-  margin: 20px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
+      .input-field {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
 
-.submit-button {
-  padding: 10px 20px;
-  background-color: red;
-  color: #fff;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  margin-bottom: 30px;
+      .submit-button {
+        padding: 10px 20px;
+        background-color: red;
+        color: #fff;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 30px;
 
-  margin-top: 20px;
-}
+        margin-top: 20px;
+      }
 
-    </style>
-        <%- include('navBar'); %>
+      .order-history-table {
 
-</head>
-<body>
-   
 
- <div class="main-con">
-
-  <div class="input-container">
-    <input
-      type="text"
-      id="apiKey"
-      class="input-field"
-      placeholder="Enter ApiKey"
-    />
-    <input
-      type="text"
-      id="secretKey"
-      class="input-field"
-      placeholder="Enter SecretKey"
-    />
-    <input
-      type="text"
-      id="paraPhrase"
-      class="input-field"
-      placeholder="Enter ParaPhrase"
-    />
-    <button id="submitButton" class="submit-button">Submit</button>
-  </div>
-         <table id="data-history">
-        <h2><caption>Get Order History</caption></h2>
-        <tr>
-          <th>Code</th>
-          <th>Message</th>
-          <th>Request Time</th>
-        </tr>
-      </table>
-      <table id="data-transactionHistory">
-        <h2><caption>Get Transaction History</caption></h2>
-        <tr>
-          <th>Code</th>
-          <th>Message</th>
-          <th>Request Time</th>
-        </tr>
-      </table>
-      <table id="data-transferHistory">
-        <h2><caption>Get Transfer History</caption></h2>
-        <tr>
-          <th>Code</th>
-          <th>Message</th>
-          <th>Request Time</th>
-        </tr>
-      </table>
-</div>
-
+      }
+      .table-c {
+       display: flex;
+       justify-content: center;
+       flex-direction: column;   
+      text-align: center;
+      margin-top: 1rem;
+      } 
      
+    </style>
+    <%- include('navBar'); %>
+  </head>
+  <body>
+    <div class="main-con">
+      <div class="input-container">
+        <input
+          type="text"
+          id="apiKey"
+          class="input-field"
+          placeholder="Enter ApiKey"
+        />
+        <input
+          type="text"
+          id="secretKey"
+          class="input-field"
+          placeholder="Enter SecretKey"
+        />
+        <input
+          type="text"
+          id="paraPhrase"
+          class="input-field"
+          placeholder="Enter ParaPhrase"
+        />
+        <button id="submitButton" class="submit-button">Submit</button>
+      </div>
+    </div>
+    <!--  -->
+    <div class="order-history-table">
+      <div class="table-c">
+        <table id="data-history">
+          <h2>Get Order History</h2>
+          <tr>
+            <th>Code</th>
+            <th>Message</th>
+            <th>Request Time</th>
+          </tr>
+        </table>
+      </div>
+     <div class="table-c">
+      <table id="data-transactionHistory">
+        <h2>
+           Get Transaction History  </h2>
+        <tr>
+          <th>Code</th>
+          <th>Message</th>
+          <th>Request Time</th>
+        </tr>
+     </div>
+      </table>
+     <div class="table-c">
+      <table id="data-transferHistory">
+        <h2>Get Transfer History</h2>
+        <tr>
+          <th>Code</th>
+          <th>Message</th>
+          <th>Request Time</th>
+        </tr>
+      </table>
+     </div>
+    </div>
+  </body>
 
+  <script>
+    const submitButton = document.getElementById("submitButton");
 
- <script>
-  const submitButton = document.getElementById("submitButton");
+    submitButton.addEventListener("click", function () {
+      const apiKey = document.getElementById("apiKey").value;
+      const secretKey = document.getElementById("secretKey").value;
+      const paraPhrase = document.getElementById("paraPhrase").value;
+      // console.log(apiKey.length)
+      if (apiKey.length < 10 || secretKey < 10 || paraPhrase.length < 5) {
+        window.alert("Please Enter the Data into input Fields");
+        return -1;
+      }
 
-submitButton.addEventListener("click", function() {
-  const apiKey = document.getElementById("apiKey").value;
-  const secretKey = document.getElementById("secretKey").value;
-  const paraPhrase = document.getElementById("paraPhrase").value;
-// console.log(apiKey.length)
-  if (apiKey.length<5 || secretKey<5 || paraPhrase.length<5 ) {
-    window.alert("Please Enter the Data into input Fields")
-    return -1;
-  }
-  
-
-
-  axios({
-  method: 'get',
-  url: 'https://cheerful-bikini-ox.cyclic.app/v1/api/history',
-headers:{
-  "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-  'Access-Control-Allow-Origin': '*',
-  'Content-Type': 'application/json'
-
-},
-headers: {
-              
-              },
-  params:{
-    apiKey:apiKey,
-    secretKey:secretKey,
-    paraPhrase:paraPhrase,
-    coinId:2,
-    groupType:"deposit",
-fromType:"spot",
-before:1659076670000,
-after:987952085712531457,
-limit:100,
-  }
-
-})
-.then(function (response) {
+      axios({
+        method: "get",
+        url: "https://cheerful-bikini-ox.cyclic.app/v1/api/history",
+        headers: {
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+        headers: {},
+        params: {
+          apiKey: apiKey,
+          secretKey: secretKey,
+          paraPhrase: paraPhrase,
+          coinId: 2,
+          groupType: "deposit",
+          fromType: "spot",
+          before: 1659076670000,
+          after: 987952085712531457,
+          limit: 100,
+        },
+      })
+        .then(function (response) {
           let data = response.data;
           let table = document.getElementById("data-history");
           let row = table.insertRow();
@@ -192,36 +200,34 @@ limit:100,
           cell3.innerHTML = data.requestTime;
         })
         .catch(function (error) {
-          // console.log(error);
+          alert("Credentials not Correct");
+          return -1;
+
         });
 
+      axios({
+        method: "get",
+        url: "https://cheerful-bikini-ox.cyclic.app/v1/api/transaction",
+        headers: {
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
 
-        axios({
-  method: 'get',
-  url: 'https://cheerful-bikini-ox.cyclic.app/v1/api/transaction',
-  headers:{
-    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-  'Access-Control-Allow-Origin': '*',
-  'Content-Type': 'application/json'
-
-
-},
-
-
-  params:{
-    apiKey:apiKey,
-    secretKey:secretKey,
-    paraPhrase:paraPhrase,
-    coinId:2,
-    groupType:"deposit",
-fromType:"spot",
-before:1659076670000,
-after:987952085712531457,
-limit:100,
-  }
-
-})
-.then(function (response) {
+        params: {
+          apiKey: apiKey,
+          secretKey: secretKey,
+          paraPhrase: paraPhrase,
+          coinId: 2,
+          groupType: "deposit",
+          fromType: "spot",
+          before: 1659076670000,
+          after: 987952085712531457,
+          limit: 100,
+        },
+      })
+        .then(function (response) {
+          console.log("Trans:"+response.status)
           let data = response.data;
           let table = document.getElementById("data-transactionHistory");
           let row = table.insertRow();
@@ -233,33 +239,33 @@ limit:100,
           cell3.innerHTML = data.requestTime;
         })
         .catch(function (error) {
+          alert("Credentials not Correct");
+
         });
-// Transfer
-axios({
-  method: 'get',
-  url: 'https://cheerful-bikini-ox.cyclic.app/v1/api/transfer',
-  headers:{
-    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-  'Access-Control-Allow-Origin': '*',
-  'Content-Type': 'application/json'
+      // Transfer
+      axios({
+        method: "get",
+        url: "https://cheerful-bikini-ox.cyclic.app/v1/api/transfer",
+        headers: {
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
 
-},
-  
-
-  params:{
-    apiKey:apiKey,
-    secretKey:secretKey,
-    paraPhrase:paraPhrase,
-    coinId:2,
-    groupType:"deposit",
-fromType:"spot",
-before:1659076670000,
-after:987952085712531457,
-limit:100,
-  }
-
-})
-.then(function (response) {
+        params: {
+          apiKey: apiKey,
+          secretKey: secretKey,
+          paraPhrase: paraPhrase,
+          coinId: 2,
+          groupType: "deposit",
+          fromType: "spot",
+          before: 1659076670000,
+          after: 987952085712531457,
+          limit: 100,
+        },
+      })
+        .then(function (response) {
+          console.log("Trans:"+response.status)
           let data = response.data;
           let table = document.getElementById("data-transferHistory");
           let row = table.insertRow();
@@ -271,14 +277,11 @@ limit:100,
           cell3.innerHTML = data.requestTime;
         })
         .catch(function (error) {
-          console.log(error);
+          alert("Credentials not Correct");
+
         });
+    });
 
-      })
-
-      // Trans
-   
-      
-
- </script>
+    // Trans
+  </script>
 </html>

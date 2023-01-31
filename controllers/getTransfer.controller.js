@@ -25,7 +25,7 @@ const getTransferHistoryController = async (req, res) => {
       })
       .catch((err) => {
         console.error("ERROR: TransactionHistory: ", err);
-        res.send(err);
+        res.status(400).json({ error: "Something went wrong" });
       });
   } catch (error) {
     return res.status(400).json({ error: "Something went wrong" });
