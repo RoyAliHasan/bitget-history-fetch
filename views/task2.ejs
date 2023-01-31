@@ -227,8 +227,6 @@
             },
           })
             .then(function (response) {
-              console.log("User1:" + response.status);
-
               var dataBody = document.getElementById("dataBodyU1");
 
               response.data.data.forEach(function (item) {
@@ -276,7 +274,6 @@
             },
           })
             .then(function (response) {
-              console.log(response.status);
               var dataBody = document.getElementById("dataBodyU2");
 
               response.data.data.forEach(function (item) {
