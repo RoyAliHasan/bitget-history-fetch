@@ -1,0 +1,97 @@
+body {
+  background-color: rgb(204, 204, 204);
+  margin: 0;
+  padding: 0;
+}
+table {
+  width: 50%;
+  border-collapse: collapse;
+  /* height: 20%;
+    margin-left: 100px;
+    margin-bottom: 40px; */
+}
+
+thead {
+  background-color: #333;
+  color: #fff;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #333;
+  text-align: center;
+  width: 10%;
+}
+
+th {
+  background-color: #333;
+  color: #fff;
+}
+
+tr:nth-child(even) {
+  background-color: #ddd;
+}
+.input-container {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  margin-bottom: 100px;
+}
+
+.input-field {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: red;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 30px;
+
+  margin-top: 20px;
+}
+.inputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+.input-1 {
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+}
+.order-table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  width: 300px;
+  align-items: center;
+  justify-content: space-between;
+}
+.order-history-table {
+}
+.table-c {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 1rem;
+}

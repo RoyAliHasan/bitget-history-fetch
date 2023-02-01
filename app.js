@@ -1,10 +1,12 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+
 app.use(cors());
 
 // Set Template Engine
 app.set("view engine", "ejs");
+app.engine("html", require("ejs").renderFile);
 
 app.use("/v1/api", require("./routes/history.routes"));
 

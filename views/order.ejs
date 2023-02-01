@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bitget | Home</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
     <%- include('navBar'); %>
     <style>
       body {
@@ -17,9 +16,7 @@
       table {
         width: 50%;
         border-collapse: collapse;
-        /* height: 20%;
-        margin-left: 100px;
-        margin-bottom: 40px; */
+      
       }
 
       thead {
@@ -96,6 +93,15 @@
         width: 300px;
         align-items: center;
         justify-content: space-between;
+      }
+      .order-history-table {
+      }
+      .table-c {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        margin-top: 1rem;
       }
     </style>
   </head>
@@ -199,8 +205,34 @@
         </thead>
         <tbody id="dataBodyU2"></tbody>
       </table>
+      <table id = "dataTable">
+        <h1>Orders Difference</h1>
+        <thead>
+              <tr>
+              <th>Fill Price</th>
+              <th>Fill Quantity </th>
+              <th>Fill Total Amount </th>
+              <th>Fees </th>
+            </tr>
+            <tbody>
+              <tr>
+                <td id="fill"></td>
+                <td id="quantity"></td>
+                <td id="total"></td>
+                <td id="fee"></td>
+              </tr>
+            </tbody>
+          </thead>
+        </table>
+         <button  class="submit-button" onclick="getDATA()" id="showData" type="submit"">Get Difference</button>
+     
     </div>
+    <div >
+     
+      </div>
     <script>
+      let firstOrder = {};
+      let secondOrder={};
       submitButton.addEventListener("click", function () {
         const apiKey = document.getElementById("apiKey").value;
         const secretKey = document.getElementById("secretKey").value;
@@ -230,6 +262,7 @@
               var dataBody = document.getElementById("dataBodyU1");
 
               response.data.data.forEach(function (item) {
+                firstOrder = item;
                 var row = document.createElement("tr");
 
                 for (var key in item) {
@@ -246,7 +279,7 @@
             });
         }
       });
-
+      console.log(firstOrder.orderId);
       // User 2
       submitButton1.addEventListener("click", function () {
         const apiKey1 = document.getElementById("apiKey1").value;
@@ -277,6 +310,7 @@
               var dataBody = document.getElementById("dataBodyU2");
 
               response.data.data.forEach(function (item) {
+                secondOrder=item
                 var row = document.createElement("tr");
 
                 for (var key in item) {
@@ -293,6 +327,28 @@
             });
         }
       });
+      function getDATA() {
+        fillPrice = firstOrder.fillPrice + "/" + secondOrder.fillPrice;
+        fillQuantity =
+        firstOrder.fillQuantity + "/" + secondOrder.fillQuantity;
+        fillTotalAmount =
+        firstOrder.fillTotalAmount + "/" + secondOrder.fillTotalAmount;
+        fees = firstOrder.fees + "/" + secondOrder.fees;
+       if ( secondOrder.fillPrice==undefined || firstOrder.fillPrice==undefined) {
+        alert("Please put the credentials for Both User")
+        return -1;
+       } else {
+        document
+          .getElementById("showData")
+          .addEventListener("click", function () {
+            document.getElementById("fill").innerHTML = fillPrice;
+            document.getElementById("quantity").innerHTML = fillQuantity;
+            document.getElementById("total").innerHTML = fillTotalAmount;
+            document.getElementById("fee").innerHTML = fees;
+          });
+       }
+       }
+          
     </script>
   </body>
 </html>
