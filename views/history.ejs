@@ -6,9 +6,10 @@
     <style>
       body{
         background-color: #c3d5e4;
+        overflow-x: hidden;
       }
       table {
-        width: 50%;
+        width: 100%;
         border-collapse: collapse;
       
       }
@@ -81,23 +82,90 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
+        position: absolute;
+        margin-left: 27rem;
+        top: 6.7rem;
       }
       .selection-outer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
         margin-top: 2rem;
       }
       .OrderHistoryTable{
+        position:absolute;
+        top:30rem;
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
-        margin-top: 10rem;
+        margin-top: 0rem;
+        margin-bottom: 3rem;
         flex-direction: column;
+      }
+      .input-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        /* height: 100vh; */
+        margin-bottom: 100px;
+      }
+
+      .input-field {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      .submit-button {
+        padding: 10px 20px;
+        background-color: red;
+        color: #fff;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 30px;
+
+        margin-top: 20px;
       }
       </style>
   </head>
   <%- include('navBar'); %>
   <body>
+    <!-- Form for Get Credentials -->
+   
+
+    <!-- Credentials End Here -->
     <div class="selection-outer">
+      <div class="main-con">
+        <div class="input-container">
+          <input
+            type="text"
+            id="apiKey"
+            class="input-field"
+            placeholder="Enter ApiKey"
+            required
+          />
+          <input
+            type="text"
+            id="secretKey"
+            class="input-field"
+            placeholder="Enter SecretKey"
+            required
+          />
+          <input
+            type="text"
+            id="paraPhrase"
+            class="input-field"
+            placeholder="Enter ParaPhrase"
+            required
+          />
+          <button type="submit" id="submitButton" class="submit-button">Submit</button>
+        </div>
+      </div>
       <div class="selection">
         <div class="product-select">
           <select name="product-types" class="selection-c" id="product-types">
@@ -139,6 +207,21 @@
   </body>
 
   <script>
+    const submitButton = document.getElementById("submitButton");
+
+submitButton.addEventListener("click", function () {
+  const apiKey = document.getElementById("apiKey").value;
+  const secretKey = document.getElementById("secretKey").value;
+  const paraPhrase = document.getElementById("paraPhrase").value;
+  if (apiKey.length < 10 || secretKey < 10 || paraPhrase.length < 5) {
+   return -1;
+  }
+  else{
+    getUserCredentials(apiKey,secretKey,paraPhrase)
+  }
+
+  
+  })
     const productTypes = [
       "umcbl",
       "dmcbl",
@@ -151,8 +234,8 @@
     const select = document.getElementById("product-types");
     productTypes.forEach((productType) => {
       const option = document.createElement("option");
-      option.value = productType.toUpperCase();
-      option.innerHTML = productType.toUpperCase();
+      option.value = productType;
+      option.innerHTML = productType;
       select.appendChild(option);
     });
     const pType = document.getElementById("product-types");
@@ -180,24 +263,31 @@
 
           const result = items.filter(function (item) {
             const option = document.createElement("option");
-            option.value = item.symbol;
-            option.innerHTML = item.symbol;
+            option.value = item.symbol.toLocaleLowerCase();
+            option.innerHTML = item.symbol.toLocaleLowerCase();
             select.appendChild(option);
           });
         })
         .catch(function (error) {
         });
     });
-    const sType = document.getElementById("symbols");
+const getUserCredentials=(apiKey,secretKey,paraPhrase)=>{
+  const sType = document.getElementById("symbols");
 
     sType.addEventListener("change", function () {
       const selectedOption = this.value;
       axios({
         method: "get",
-        url: "https://cheerful-bikini-ox.cyclic.app//v1/api/history?ApiKey=bg_0afe7deb31fd2b8cd109218f0a4c17da&secretKey=17526f340bfef2d965fe564ac1deaea40e4a56de9c4ea6a8ca374cc04891922b&paraPhrase=royalihasan0987&before=1659076670000&after=987952085712&limit=100",
+        url: "https://cheerful-bikini-ox.cyclic.app/v1/api/history",
         headers: {},
         params: {
           symbol: selectedOption,
+          ApiKey: apiKey,
+          secretKey: secretKey,
+          paraPhrase: paraPhrase,
+          before: 1659076670000,
+          after: 987952085712531457,
+          limit: 100
         },
       })
         .then(function (response) {
@@ -217,7 +307,11 @@ response.data.data.forEach(function (item) {
 });
         })
         .catch(function (error) {
+
         });
     });
+}
+    
+    
   </script>
 </html>
