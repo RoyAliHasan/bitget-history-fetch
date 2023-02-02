@@ -165,7 +165,7 @@
       }
       axios({
         method: "get",
-        url: "https://api.bitget.com/api/mix/v1/market/contracts",
+        url: "http://localhost:3000/v1/api/contracts",
         headers: {
           // "ACCESS-KEY": "bg_0afe7deb31fd2b8cd109218f0a4c17da",
           // "ACCESS-SIGN":
@@ -208,7 +208,7 @@
       console.log(selectedOption);
       axios({
         method: "get",
-        url: "http://localhost:5000/v1/api/history?ApiKey=bg_0afe7deb31fd2b8cd109218f0a4c17da&secretKey=17526f340bfef2d965fe564ac1deaea40e4a56de9c4ea6a8ca374cc04891922b&paraPhrase=royalihasan0987&before=1659076670000&after=987952085712&limit=100",
+        url: "http://localhost:3000/v1/api/history?ApiKey=bg_0afe7deb31fd2b8cd109218f0a4c17da&secretKey=17526f340bfef2d965fe564ac1deaea40e4a56de9c4ea6a8ca374cc04891922b&paraPhrase=royalihasan0987&before=1659076670000&after=987952085712&limit=100",
         headers: {},
         params: {
           symbol: selectedOption,
