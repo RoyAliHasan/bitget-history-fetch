@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+      #product-types {
+        width: 200px;
+        height: 40px;
+        font-size: 16px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 1px 1px #ddd;
+        margin-top: 10px;
+      }
+
+      #product-types option {
+        padding: 10px;
+      }
+      .product-select {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        margin: 10px;
+      }
+      .product-btn {
+        width: 150px;
+        height: 40px;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #337ab7;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        margin-top: 14px;
+        cursor: pointer;
+        margin-left: 20px;
+      }
+
+      .product-btn:hover {
+        background-color: #285e8e;
+      }
+    </style>
+    <%- include('navBar'); %>
+  </head>
+  <body>
+    <div class="product-select">
+      <select name="product-types" id="product-types">
+        <option selected>Select the Product Type</option>
+      </select>
+      <button class="product-btn">Submit</button>
+    </div>
+  </body>
+
+  <script>
+    const productTypes = [
+      "umcbl",
+      "dmcbl",
+      "cmcbl",
+      "sumcbl",
+      "sdmcbl",
+      "scmcbl",
+    ];
+
+    const select = document.getElementById("product-types");
+
+    productTypes.forEach((productType) => {
+      const option = document.createElement("option");
+      option.value = productType;
+      option.innerHTML = productType;
+      select.appendChild(option);
+    });
+    const pType = document.getElementById("product-types");
+
+    pType.addEventListener("change", function () {
+      const selectedOption = this.value;
+      axios({
+        method: "get",
+        url: "https://api.bitget.com/api/mix/v1/market/contracts",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        params: {
+          productType: selectedOption,
+        },
+      })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log("Contract Api Not Working...");
+        });
+    });
+  </script>
+</html>
+
+<!-- "https://api.bitget.com/api/mix/v1/market/contracts?productType=umcbl" -->

@@ -6,4 +6,5 @@ const client = new SpotClient({
   apiSecret: process.env.SECRETE_KEY,
   apiPass: process.env.PASS_PHRASE,
 });
+
 module.exports = { client };

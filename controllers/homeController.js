@@ -1,5 +1,5 @@
 const homeController = (req, res) => {
-  res.render("index");
+  res.render("history");
 };
 const orderViewController = (req, res) => {
   res.setHeader("Content-Type", "text/html");
