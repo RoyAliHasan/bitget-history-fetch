@@ -4,7 +4,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
-      #product-types {
+      .selection-c {
         width: 200px;
         height: 40px;
         font-size: 16px;
@@ -15,7 +15,7 @@
         margin-top: 10px;
       }
 
-      #product-types option {
+      .product-types option {
         padding: 10px;
       }
       .product-select {
@@ -42,15 +42,33 @@
       .product-btn:hover {
         background-color: #285e8e;
       }
+      .selection {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+      .selection-outer {
+      }
     </style>
     <%- include('navBar'); %>
   </head>
   <body>
-    <div class="product-select">
-      <select name="product-types" id="product-types">
-        <option selected>Select the Product Type</option>
-      </select>
-      <button class="product-btn">Submit</button>
+    <div class="selection-outer">
+      <div class="selection">
+        <div class="product-select">
+          <select name="product-types" class="selection-c" id="product-types">
+            <option selected>--Select Product--</option>
+          </select>
+          <!-- <button class="product-btn">Submit</button> -->
+        </div>
+        <div class="product-select">
+          <select name="select-symbol " class="selection-c" id="symbols">
+            <option selected>--Select Symbol--</option>
+          </select>
+          <!-- <button class="product-btn">Submit</button> -->
+        </div>
+      </div>
     </div>
   </body>
 
@@ -76,6 +94,10 @@
 
     pType.addEventListener("change", function () {
       const selectedOption = this.value;
+
+      if (selectedOption == "--Select Product--") {
+        return -1;
+      }
       axios({
         method: "get",
         url: "https://api.bitget.com/api/mix/v1/market/contracts",
@@ -88,7 +110,15 @@
         },
       })
         .then(function (response) {
-          console.log(response);
+          const items = response.data.data;
+          const select = document.getElementById("symbols");
+
+          const result = items.filter(function (item) {
+            const option = document.createElement("option");
+            option.value = item.symbol;
+            option.innerHTML = item.symbol;
+            select.appendChild(option);
+          });
         })
         .catch(function (error) {
           console.log("Contract Api Not Working...");
