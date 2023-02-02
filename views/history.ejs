@@ -4,8 +4,38 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
+      body{
+        background-color: #c3d5e4;
+      }
+      table {
+        width: 50%;
+        border-collapse: collapse;
+      
+      }
+
+      thead {
+        background-color: #333;
+        color: #fff;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #333;
+        text-align: center;
+        width: 10%;
+      }
+
+      th {
+        background-color: #333;
+        color: #fff;
+      }
+
+      tr:nth-child(even) {
+        background-color: #ddd;
+      }
       .selection-c {
-        width: 200px;
+        width: 250px;
         height: 40px;
         font-size: 16px;
         padding: 10px;
@@ -13,6 +43,10 @@
         border-radius: 5px;
         box-shadow: 1px 1px #ddd;
         margin-top: 10px;
+        background-color:  #285e8e;
+        color: white;
+        font-weight: bold;
+        
       }
 
       .product-types option {
@@ -49,10 +83,18 @@
         justify-content: center;
       }
       .selection-outer {
+        margin-top: 2rem;
       }
-    </style>
-    <%- include('navBar'); %>
+      .OrderHistoryTable{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 10rem;
+      }
+      </style>
   </head>
+  <%- include('navBar'); %>
   <body>
     <div class="selection-outer">
       <div class="selection">
@@ -70,6 +112,28 @@
         </div>
       </div>
     </div>
+    <!-- OrderHistoryTable -->
+   <div class="OrderHistoryTable">
+    <table id="dataTable">
+      <thead>
+        <tr>
+<th>accountId</th>
+<th>symbol</th>
+<th>orderId</th>
+<th>clientOrderId</th>
+<th>price</th>
+<th>quantity</th>
+<th>orderType</th>
+<th>side</th>
+<th>status</th>
+<th>fillPrice</th>
+<th>fillQuantity</th>
+<th>fillTotalAmount</th>
+<th>cTime</th>
+        </tr>
+      </thead>
+      <tbody id="orderHistoryTable"></tbody>
+   </div>
   </body>
 
   <script>
@@ -83,7 +147,6 @@
     ];
 
     const select = document.getElementById("product-types");
-
     productTypes.forEach((productType) => {
       const option = document.createElement("option");
       option.value = productType;
@@ -102,7 +165,19 @@
         method: "get",
         url: "https://api.bitget.com/api/mix/v1/market/contracts",
         headers: {
+          "ACCESS-KEY": "bg_0afe7deb31fd2b8cd109218f0a4c17da",
+          "ACCESS-SIGN":
+            "17526f340bfef2d965fe564ac1deaea40e4a56de9c4ea6a8ca374cc04891922b",
+          "ACCESS-PASSPHRASE": "royalihasan0987",
+          "ACCESS-TIMESTAMP": "1659076670000",
+          locale: "en-US",
           "Content-Type": "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Headers":
+            "Origin, Content-Type, Accept, Authorization, X-Auth-Token",
         },
 
         params: {
@@ -124,7 +199,38 @@
           console.log("Contract Api Not Working...");
         });
     });
+    const sType = document.getElementById("symbols");
+
+    sType.addEventListener("change", function () {
+      const selectedOption = this.value;
+      console.log(selectedOption);
+      axios({
+        method: "get",
+        url: "http://localhost:5000/v1/api/history?ApiKey=bg_0afe7deb31fd2b8cd109218f0a4c17da&secretKey=17526f340bfef2d965fe564ac1deaea40e4a56de9c4ea6a8ca374cc04891922b&paraPhrase=royalihasan0987&before=1659076670000&after=987952085712&limit=100",
+        headers: {},
+        params: {
+          symbol: selectedOption,
+        },
+      })
+        .then(function (response) {
+          var dataBody = document.getElementById("orderHistoryTable");
+
+response.data.data.forEach(function (item) {
+  secondOrder=item
+  var row = document.createElement("tr");
+
+  for (var key in item) {
+    var cell = document.createElement("td");
+    cell.innerHTML = item[key];
+    row.appendChild(cell);
+  }
+
+  dataBody.appendChild(row);
+});
+        })
+        .catch(function (error) {
+          // console.log("Contract Api Not Working...");
+        });
+    });
   </script>
 </html>
-
-<!-- "https://api.bitget.com/api/mix/v1/market/contracts?productType=umcbl" -->
